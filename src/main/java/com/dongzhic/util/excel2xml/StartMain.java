@@ -1,8 +1,5 @@
 package com.dongzhic.util.excel2xml;
 
-import lombok.extern.slf4j.Slf4j;
-import org.apache.poi.ss.usermodel.Workbook;
-
 import java.io.File;
 import java.util.Map;
 
@@ -12,7 +9,6 @@ import java.util.Map;
  * @author: dongzhic
  * @date: 2018/5/29 18:51
  */
-@Slf4j
 public class StartMain {
 
     private final String excelPath = "E:\\User.xlsx";
