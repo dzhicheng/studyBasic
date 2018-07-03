@@ -1,4 +1,4 @@
-package com.dongzhic.design.patterns.proxy.jdkproxy;
+package com.dongzhic.design.patterns.proxy.jdkproxy.demo1;
 
 import java.util.Random;
 
