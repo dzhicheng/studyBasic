@@ -1,4 +1,4 @@
-package com.dongzhic.leetcode.primary;
+package com.dongzhic.leetcode.primary.array;
 
 /**
  * 买卖股票的最佳时机 I
@@ -7,7 +7,7 @@ package com.dongzhic.leetcode.primary;
  * @author dongzc
  * @date 2018/7/3 18:29
  */
-public class Solution1 {
+public class Solution01 {
 
     public static void main(String[] args) {
         int[] prices = {3,2,3,1,2};

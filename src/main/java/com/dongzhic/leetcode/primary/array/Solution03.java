@@ -1,4 +1,4 @@
-package com.dongzhic.leetcode.primary;
+package com.dongzhic.leetcode.primary.array;
 
 /**
  * 给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。
@@ -11,7 +11,7 @@ package com.dongzhic.leetcode.primary;
  * @author dongzc
  * @date 2018/7/4 23:24
  */
-public class Solution3 {
+public class Solution03 {
 
     public static void main(String[] args) {
         int[] a = {-1,-100,3,99};
