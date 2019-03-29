@@ -1,4 +1,4 @@
-package com.dongzhic.java.Serializable;
+package com.dongzhic.java.serializable;
 
 import java.io.Serializable;
 
