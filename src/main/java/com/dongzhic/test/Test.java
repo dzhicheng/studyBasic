@@ -1,30 +1,14 @@
 package com.dongzhic.test;
 
-<<<<<<< HEAD
-
-import java.util.ArrayList;
-import java.util.List;
-=======
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
->>>>>>> 83198ac8317ac2797f92eb12aaf1b1eccc442463
 
 public class Test {
 
     public static void main(String[] args) {
 
-<<<<<<< HEAD
-        List<String> list = null;
-        for (String s : list) {
-            System.out.println(s);
-        }
-
-
-    }
-
-=======
         // 计算用户注册天数
 
         String raiseEnddate = "2019-07-13 00:00:00";
@@ -106,5 +90,4 @@ public class Test {
 
         return Integer.parseInt(String.valueOf(between_days));
     }
->>>>>>> 83198ac8317ac2797f92eb12aaf1b1eccc442463
 }
