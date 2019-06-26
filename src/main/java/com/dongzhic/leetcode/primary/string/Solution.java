@@ -8,19 +8,96 @@ import java.util.*;
 public class Solution {
 
     public static void main(String[] args) {
-        String a = new String("abc");
-        String b = a;
-        a = "123";
+
+        int a = romanToInt("MCMXCIV");
         System.out.println(a);
-        System.out.println(b);
 
+    }
 
+    /**
+     * day002
+     * @param num
+     * @return
+     */
+    public String intToRoman(int num) {
 
-//        String a = "1010";
-//        String b = "1011";
-//        String result = addBinary(a, b);
-//        System.out.println(result);
+        return null;
+    }
 
+    /**
+     * day001
+     * 罗马数组转中文
+     *  七种字符: I=1，V=5，X=10，L=50，C=100，D=500 和 M=1000
+     *  例如， 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。 27 写做  XXVII, 即为 XX + V + II 。
+     *  通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 IIII，而是 IV。数字 1 在数字 5 的左边，
+     *      所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 IX。
+     *  这个特殊的规则只适用于以下六种情况：
+     *      I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。
+     *      X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。 
+     *      C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。
+     *  例如：LVIII=58(50+5+3)，MCMXCIV=1994(1000+900+90+4)
+     * @param s
+     * @return
+     */
+    public static int romanToInt(String s) {
+        int sum = 0;
+
+        int len = s.length();
+        char[] chars = s.toCharArray();
+
+        int i = 0;
+        while (i < len) {
+            int num = 0;
+            char c1 = chars[i];
+            switch (c1) {
+                case 'I':
+                    num = 1;
+                    break;
+                case 'V':
+                    num = 5;
+                    break;
+                case 'X':
+                    num = 10;
+                    break;
+                case 'L':
+                    num = 50;
+                    break;
+                case 'C':
+                    num = 100;
+                    break;
+                case 'D':
+                    num = 500;
+                    break;
+                case 'M':
+                    num = 1000;
+                    break;
+            }
+            if (i < len -1) {
+                char c2 = chars[i+1];
+                if (c1 == 'I' && c2 == 'V' ) {
+                    num = 4;
+                    i++;
+                } else if (c1 == 'I' && c2 == 'X' ) {
+                    num = 9;
+                    i++;
+                } else if (c1 == 'X' && c2 == 'L' ) {
+                    num = 40;
+                    i++;
+                } else if (c1 == 'X' && c2 == 'C' ) {
+                    num = 90;
+                    i++;
+                } else if (c1 == 'C' && c2 == 'D' ) {
+                    num = 400;
+                    i++;
+                } else if (c1 == 'C' && c2 == 'M' ) {
+                    num = 900;
+                    i++;
+                }
+            }
+            sum = sum + num;
+            i++;
+        }
+        return sum;
     }
 
     /**
@@ -165,4 +242,6 @@ public class Solution {
     public static String toLowerCase(String str) {
         return str.toLowerCase();
     }
+
+
 }
