@@ -7,15 +7,17 @@ package com.dongzhic.sort;
 public class Sort {
 
     public static void main(String[] args) {
-        int [] array = {3,6,1,4,2};
-        int[] a = insertionSort(array);
-        for (int i = 0; i < a.length; i++) {
-            System.out.println(a[i]);
+//        int [] array = {4, 11, 2, 78, 10, 1};
+        int [] array = {-9, 18, 0, 23, -567, 70};
+        int [] result = insertTionSort(array);
+        for (int i = 0; i < result.length; i ++) {
+            System.out.println(result[i]);
         }
     }
 
+
     /**
-     * 冒泡排序
+     * 交换排序：冒泡排序
      * @param array
      * @return
      */
@@ -24,61 +26,109 @@ public class Sort {
         if (array.length == 0) {
             return array;
         }
-        for (int i = 0; i < array.length-1; i ++) {
-            for (int j = 0; j < array.length - 1 - i; j ++) {
-                if (array[j] > array [j+1]) {
+
+        for (int i = 0; i < array.length; i ++) {
+            for (int j = 0; j < array.length -1 - i; j ++) {
+                if (array[j] > array[j + 1]) {
                     int temp = array[j];
                     array[j] = array[j+1];
                     array[j+1] = temp;
                 }
             }
         }
+
         return array;
     }
 
     /**
-     * 简单选择排序
+     * 交换排序：快速排序
      * @param array
+     * @param left
+     * @param right
      * @return
      */
-    public static int[] selectionSort (int[] array) {
-        if (array.length == 0) {
-            return array;
-        }
-        for (int i = 0; i < array.length - 1; i ++) {
-            int minIndex = i;
-            for (int j = i + 1; j < array.length; j ++ ) {
-                if (array[j] < array[minIndex]) {
-                    minIndex = j;
-                }
+    public static int[] quickSort (int[] array, int left, int right) {
+
+        int l = left;
+        int r = right;
+        // 中轴值
+        int pivot = array[(left + right)/2];
+
+        while (l < r) {
+
+            while (pivot > array[l]) {
+                l++;
             }
-            int temp = array[i];
-            array[i] = array[minIndex];
-            array[minIndex] = temp;
+
+            while (pivot < array[r]) {
+                r --;
+            }
+
+            if (l >= r) {
+                break;
+            }
+
+            int temp = array[l];
+            array[l] = array[r];
+            array[r] = temp;
+
+            //
+            if (array[l] == pivot) {
+                r --;
+            }
+
+            if (array[r] == pivot) {
+                l ++  ;
+            }
+
         }
+
+        if (l == r) {
+            l ++;
+            r --;
+        }
+
+        if (left < r) {
+            quickSort(array, left, r);
+        }
+
+        if (right > l) {
+            quickSort(array, l, right);
+        }
+
         return array;
     }
 
     /**
-     * 插入排序
+     * 插入排序：直接插入排序
      * @param array
      * @return
      */
-    public static int[] insertionSort (int[] array) {
+    public static int[] insertTionSort (int[] array) {
+
         if (array.length == 0) {
             return array;
         }
-        int current;
-        for (int i = 0; i < array.length - 1; i ++) {
-            current = array[i+1];
+
+        int current = 0;
+        for (int i = 0; i < array.length -1; i ++) {
+
+            current = array[i +1];
             int preIndex = i;
+
             while (preIndex >= 0 && current < array[preIndex]) {
                 array[preIndex+1] = array[preIndex];
-                preIndex--;
+                preIndex --;
             }
+
             array[preIndex+1] = current;
         }
+
         return array;
+
     }
+
+
+
 
 }
