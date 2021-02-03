@@ -1,5 +1,7 @@
 package com.dongzhic.leetcode.simple;
 
+import com.dongzhic.datastructures.List;
+
 /**
  * 链表
  * @Author dongzhic
@@ -9,19 +11,16 @@ public class LinkedApp {
 
     public static void main(String[] args) {
 
-        ListNode l1 = new ListNode(1);
-        ListNode l2 = new ListNode(2);
-        ListNode l3 = new ListNode(4);
-        l1.next = l2;
-        l2.next = l3;
+       ListNode node1 = new ListNode(1);
+       ListNode node2 = new ListNode(1);
+       ListNode node3 = new ListNode(1);
+       ListNode node4 = new ListNode(1);
+       ListNode node5 = new ListNode(1);
 
-        ListNode l4 = new ListNode(1);
-        ListNode l5 = new ListNode(3);
-        ListNode l6 = new ListNode(4);
-        l4.next = l5;
-        l5.next = l6;
-
-        mergeTwoLists(l1, l4);
+       node1.next = node2;
+       node2.next = node3;
+       node3.next = node4;
+       node4.next = node5;
 
 
     }

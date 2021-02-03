@@ -78,11 +78,6 @@ public class SingleLinkedList2<E> extends AbstractList<E> {
     }
 
     @Override
-    public boolean isEmpty() {
-        return false;
-    }
-
-    @Override
     public boolean contains(E element) {
         return indexOf(element) == ELEMENT_NOT_FOUND;
     }

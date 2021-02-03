@@ -1,6 +1,7 @@
 package com.dongzhic.leetcode.simple;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -11,10 +12,85 @@ public class App {
 
     public static void main(String[] args) {
 
-        int [] nums = new int[] {-2,1,-3,4,-1,2,1,-5,4};
+        int[] A = {1,2};
+        int[] B = {2,3};
 
-        System.out.println(maxSubArray(nums));
+        System.out.println(Arrays.stream(A).sum());
+        System.out.println(Arrays.stream(B).sum());
 
+//        int[] C = fairCandySwap(A, B);
+//
+//        for (int i = 0; i < C.length; i ++) {
+//            System.out.println(C[i]);
+//        }
+
+    }
+
+
+    /**
+     * 888. 公平的糖果棒交换
+     *
+     *  输入：A = [1,1], B = [2,2]
+     *  输出：[1,2]
+     * @param A
+     * @param B
+     * @return
+     */
+    public static int[] fairCandySwap(int[] A, int[] B) {
+
+        int [] result = new int[2];
+
+        int aliceNum = Arrays.stream(A).sum();
+        int bobNum = Arrays.stream(B).sum();
+
+        for (int i = 0; i < A.length; i ++) {
+
+            int temp1 = aliceNum;
+            int temp2 = bobNum;
+            int a = A[i];
+
+            for (int j =0; j < B.length; j ++) {
+                int b = B[j];
+
+                if ((aliceNum-a+b) == (bobNum-b+a)) {
+                    result[0] = a;
+                    result[1] = b;
+                    return result;
+                }
+            }
+
+        }
+
+        return result;
+    }
+
+
+    /**
+     * 1128. 等价多米诺骨牌对的数量(暴力解法)
+     *  给你一个由一些多米诺骨牌组成的列表 dominoes。
+     *  如果其中某一张多米诺骨牌可以通过旋转 0 度或 180 度得到另一张多米诺骨牌，我们就认为这两张牌是等价的。
+     *  形式上，dominoes[i] = [a, b] 和 dominoes[j] = [c, d] 等价的前提是 a==c 且 b==d，或是 a==d 且 b==c。
+     *  在 0 <= i < j < dominoes.length 的前提下，找出满足 dominoes[i] 和 dominoes[j] 等价的骨牌对 (i, j) 的数量。
+     *
+     *  输入：dominoes = [[1,2],[2,1],[3,4],[5,6]]
+     *  输出：1
+     * @param dominoes
+     * @return
+     */
+    public static int numEquivDominoPairs1(int[][] dominoes) {
+
+        int num = 0;
+
+        for (int i = 0; i < dominoes.length; i ++) {
+            for (int j = i + 1; j < dominoes.length; j ++) {
+                if ((dominoes[i][0] == dominoes[j][0] && dominoes[i][1] == dominoes[j][1]) ||
+                        (dominoes[i][0] == dominoes[j][1] && dominoes[i][1] == dominoes[j][0])) {
+                    num++;
+                }
+            }
+        }
+
+        return num;
     }
 
     /**

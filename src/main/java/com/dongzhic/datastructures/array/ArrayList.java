@@ -1,13 +1,10 @@
 package com.dongzhic.datastructures.array;
 
-import org.omg.CORBA.Object;
-
 /**
  * @Author dongzhic
  * @Date 2020-10-19 16:04
  */
 public class ArrayList<E> extends AbstractList<E>{
-
 
     /**
      * 所有元素
@@ -17,7 +14,7 @@ public class ArrayList<E> extends AbstractList<E>{
     /**
      * 默认容量大小
      */
-    private static final int DEFAULT_CAPACITY = 10;
+    private static   final int DEFAULT_CAPACITY = 10;
 
 
     public ArrayList (int capacity) {
