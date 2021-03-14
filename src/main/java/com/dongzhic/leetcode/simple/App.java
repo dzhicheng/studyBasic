@@ -1,8 +1,7 @@
 package com.dongzhic.leetcode.simple;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.Future;
 
 /**
  * @Author dongzhic
@@ -12,18 +11,159 @@ public class App {
 
     public static void main(String[] args) {
 
-        int[] A = {1,2};
-        int[] B = {2,3};
+       Map<String, Object> map = new HashMap<>(16);
+       map.put("1", 1);
+       map.put("2", 2);
+       map.put("3", 3);
 
-        System.out.println(Arrays.stream(A).sum());
-        System.out.println(Arrays.stream(B).sum());
+       for (Map.Entry<String, Object> entry : map.entrySet()) {
+           System.out.println(entry.getKey());
+           System.out.println(entry.getValue());
+       }
 
-//        int[] C = fairCandySwap(A, B);
-//
-//        for (int i = 0; i < C.length; i ++) {
-//            System.out.println(C[i]);
-//        }
+       for (String key : map.keySet()) {
+           System.out.println(key);
+           System.out.println(map.get(key));
+       }
 
+       Iterator<Map.Entry<String, Object>> iterator = map.entrySet().iterator();
+       while (iterator.hasNext()) {
+           Map.Entry<String, Object> entry = iterator.next();
+           entry.getKey();
+           entry.getValue();
+       }
+    }
+
+    /**
+     * 14. 最长公共前缀
+     * @param strs
+     * @return
+     */
+    public String longestCommonPrefix(String[] strs) {
+
+
+        return "";
+    }
+
+
+    /**
+     * 20. 有效的括号
+     * 输入：s = "()[]{}"
+     * 输出：true
+     * @param s
+     * @return
+     */
+    public static boolean isValid(String s) {
+
+        char[] chars = s.toCharArray();
+
+        // 1.判空
+        if (s == null || "".equals(s)) {
+            return false;
+        }
+
+        // 判断位数，必须是偶数
+        if (chars.length%2 != 0) {
+            return false;
+        }
+
+
+        Map<Character, Character> map = new HashMap<>();
+        map.put(')', '(');
+        map.put('}', '{');
+        map.put(']', '[');
+
+        Stack<Character> stack = new Stack<>();
+
+
+        for (int i = 0; i < chars.length; i ++) {
+            if (map.containsKey(chars[i]) ) {
+                if (stack.isEmpty() || stack.peek() != map.get(chars[i])) {
+                    return false;
+                }
+
+                if (stack.peek() == map.get(chars[i])) {
+                    stack.pop();
+                } else {
+                    return false;
+                }
+            } else {
+                stack.push(chars[i]);
+            }
+        }
+
+        return stack.isEmpty();
+    }
+
+
+
+    /**
+     * 9. 回文数
+     * @param x
+     * @return
+     */
+    public static boolean isPalindrome1(int x) {
+
+        if (x < 0 || (x%10==0 && x != 0)) {
+            return false;
+        }
+
+        int revertedNumber = 0;
+        while (x > revertedNumber) {
+            revertedNumber = revertedNumber * 10 + x % 10;
+            x /= 10;
+        }
+
+        if (x == revertedNumber || x == revertedNumber/10) {
+            return true;
+        }
+
+        return false;
+
+    }
+
+
+
+
+    /**
+     * 88. 合并两个有序数组
+     *  双指针法
+     * @param nums1
+     * @param m
+     * @param nums2
+     * @param n
+     */
+    public static void merge(int[] nums1, int m, int[] nums2, int n) {
+        int i = m - 1;
+        int j = n - 1;
+        int k = m + n -1;
+
+        while (i >=0 || j >= 0) {
+
+            if (i < 0) {
+                nums1[k] = nums2[j--];
+            } else if (j < 0) {
+                break;
+            } else if (nums2[j] >= nums1[i]) {
+                nums1[k] = nums2[j--];
+            } else {
+                nums1[k] = nums1[i--];
+            }
+            k--;
+        }
+        System.out.println();
+
+    }
+
+    /**
+     * 70. 爬楼梯
+     * @param n
+     * @return
+     */
+    public int climbStairs(int n) {
+
+
+        return 0;
     }
 
 

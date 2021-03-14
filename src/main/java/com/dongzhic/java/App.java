@@ -3,50 +3,48 @@ package com.dongzhic.java;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.locks.LockSupport;
 
 /**
  * @author dongzhic
  */
 public class App {
 
+    static Thread t1 = null;
+    static Thread t2 = null;
 
     public static void main(String[] args) {
 
-        String customkey = "ylcf";
-        int vipLevel = 2;
 
-        boolean flag = (isEmpty(customkey) || "ylcf".equals(customkey) || "zhannei".equals(null)) && vipLevel > 0;
+        String number = "1234567";
+        String letter = "ABCDEFG";
 
+        char[] aI = number.toCharArray();
+        char[] aC = letter.toCharArray();
 
-        //注册年数
-        int registerYears = 0;
-
-        //注册日弹窗逻辑》》》》》
-        String create_date = "2018-04-10 10:09:07";
-        //注册年数
-        Date createDate = dateStrToDate(create_date,"yyyy-MM-dd");
-        registerYears = getYearMargin(new Date(),createDate);
-
-        if(registerYears > 0){
-            int diffRegistDays = comparePastDate(formartDate(createDate,"MM-dd"),getNowDayFormat("MM-dd"));
-
-            if(diffRegistDays >= 0 && diffRegistDays <= 30){
-                System.out.println("=====================");
+        t1 = new Thread( () -> {
+            for (char c : aI) {
+                System.out.println(c);
+                // 叫醒T2
+                LockSupport.unpark(t2);
+                // T1阻塞，当前线程阻塞
+                LockSupport.park();
             }
-        }
+        }, "t1");
 
+        t2 = new Thread( () -> {
+            for (char c : aC) {
+                // T2挂起
+                LockSupport.park();
+                System.out.println(c);
+                // 叫醒T1
+                LockSupport.unpark(t1);
+            }
+        }, "t2");
 
-//        Integer num = new Integer(10);
+        t1.start();
+        t2.start();
 
-//        Map<String, String> map = new HashMap(16);
-//        map.put("ylCoin", "10");
-//
-//
-//
-//
-//
-//        String a = test();
-//        System.out.println(a);
     }
 
     public static boolean isEmpty(String arg) {
