@@ -1,6 +1,7 @@
 package com.dongzhic.design.patterns.proxy.cglibproxy.demo2;
 
 /**
+ * 代理模式
  * @author dongzc
  * @date 2018/7/3 12:12
  */

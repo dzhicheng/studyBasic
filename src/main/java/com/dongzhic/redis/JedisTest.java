@@ -1,9 +1,11 @@
 package com.dongzhic.redis;
 
 import org.junit.Test;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
-import redis.clients.jedis.JedisPoolConfig;
+import redis.clients.jedis.*;
+
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author dongzc
@@ -11,8 +13,51 @@ import redis.clients.jedis.JedisPoolConfig;
  */
 public class JedisTest {
 
-    private final String IP = "58.87.120.249";
-    private final int PORT = 6379;
+    private static final String IP = "60.60.1.90";
+    private static final int PORT = 6380;
+
+    public static void main(String[] args) {
+
+
+
+    }
+
+    /**
+     * 集群
+     */
+    public void cluster () {
+        JedisPoolConfig config = new JedisPoolConfig();
+        config.setMaxTotal(20);
+        config.setMaxIdle(10);
+        config.setMinIdle(5);
+
+        Set<HostAndPort> jedisClusterNode = new HashSet<>();
+        jedisClusterNode.add(new HostAndPort("104.155.205.150", 8001));
+        jedisClusterNode.add(new HostAndPort("34.80.241.200", 8002));
+        jedisClusterNode.add(new HostAndPort("35.201.252.85", 8003));
+        jedisClusterNode.add(new HostAndPort("104.155.205.150", 8004));
+        jedisClusterNode.add(new HostAndPort("34.80.241.200", 8005));
+        jedisClusterNode.add(new HostAndPort("35.201.252.85", 8006));
+
+        JedisCluster jedisCluster = null;
+        try {
+            jedisCluster = new JedisCluster(jedisClusterNode, 6000, 5000, 10, "dong", config);
+            System.out.println(jedisCluster.set("user:102", "dzc"));
+            System.out.println(jedisCluster.get("user:102"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (jedisCluster != null) {
+                try {
+                    jedisCluster.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+
 
     @Test
     public void demo01 () {
@@ -28,8 +73,7 @@ public class JedisTest {
         jedis.close();
     }
 
-    @Test
-    public void demo02 () {
+    public static void demo02 () {
         String key = "name";
         JedisPoolConfig config = new JedisPoolConfig();
         // 设置最大连接数

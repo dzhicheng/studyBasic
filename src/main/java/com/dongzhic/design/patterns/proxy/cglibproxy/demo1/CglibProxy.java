@@ -24,7 +24,7 @@ public class CglibProxy implements MethodInterceptor {
 
     /**
      * 拦截所有目标方法的调用
-     * @param o 目标方法的实例
+     * @param o 目标方法的实例（生成动态代理的对象）
      * @param method 目标方法的反射对象
      * @param objects 方法的参数
      * @param methodProxy 代理类的实例

@@ -6,7 +6,7 @@ package com.dongzhic.design.patterns.factory.factorymethod.demo1;
  */
 public class FactoryBMW523 implements FactoryBMW {
 
-    public BMW523 createBMW() {
+    public BMW createBMW() {
         return new BMW523();
     }
 }

@@ -15,6 +15,8 @@ public class Main {
         InvocationHandler timeHandler = new TimeHandler(car);
         Class<?> c = car.getClass();
 
+        System.getProperties().put("jdk.proxy.ProxyGenerator.saveGeneratedFiles", "true");
+
         /**
          * 时间处理器
          * loader 类加载器
