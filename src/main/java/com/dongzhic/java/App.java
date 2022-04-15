@@ -1,50 +1,135 @@
 package com.dongzhic.java;
 
+import org.openjdk.jol.info.ClassLayout;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.*;
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.LockSupport;
+import java.util.logging.Logger;
 
 /**
  * @author dongzhic
  */
 public class App {
 
+
     static Thread t1 = null;
     static Thread t2 = null;
 
     public static void main(String[] args) {
 
+        String a = null;
+        String b = String.valueOf(a);
+        System.out.println(b);
 
-        String number = "1234567";
-        String letter = "ABCDEFG";
+//        Integer a = 1;
+//        if (a > 0) {
+//            System.out.println(1111111111);
+//        }
+//
+//        String a = null;
+//        // 三元表达式对于不可互转一个常量，一个变量的情况，会默认泛型为变量类型
+//        System.out.println(false ? 0 : a);
+//
+//        Integer b = null;
+//        // 类型不同，但可互转，会拆箱，执行b.intValue()抛空指针异常
+//        System.out.println(false ? 0 : b);
+//
+//        List<Integer> list1 = new ArrayList<>();
 
-        char[] aI = number.toCharArray();
-        char[] aC = letter.toCharArray();
 
-        t1 = new Thread( () -> {
-            for (char c : aI) {
-                System.out.println(c);
-                // 叫醒T2
-                LockSupport.unpark(t2);
-                // T1阻塞，当前线程阻塞
-                LockSupport.park();
-            }
-        }, "t1");
+//        LocalDate localDate = LocalDate.of(2021, 10, 25);
+//        System.out.println(localDate.getYear());
+//        System.out.println(localDate.getMonth());
+//        System.out.println(localDate.getDayOfMonth());
 
-        t2 = new Thread( () -> {
-            for (char c : aC) {
-                // T2挂起
-                LockSupport.park();
-                System.out.println(c);
-                // 叫醒T1
-                LockSupport.unpark(t1);
-            }
-        }, "t2");
+//        SimpleDateFormat
 
-        t1.start();
-        t2.start();
 
+
+//        String a = "a";
+//        String b = "b";
+//        String c = a + b;
+//        String d = new String("a") + new String("b");
+//        System.out.println(c == "ab");
+
+//        try {
+//            TimeUnit.SECONDS.sleep(5);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+
+//        // 1.无锁(匿名偏向锁)
+//        Object o = new Object();
+//        System.out.println(ClassLayout.parseInstance(o).toPrintable());
+//
+//        // 2.偏向锁
+//        synchronized (o) {
+//            System.out.println(ClassLayout.parseInstance(o).toPrintable());
+//        }
+//
+//        // 3.轻量级锁
+//        new Thread(() -> {
+//            synchronized (o) {
+//                System.out.println(ClassLayout.parseInstance(o).toPrintable());
+//            }
+//        }).start();
+//        try {
+//            TimeUnit.SECONDS.sleep(2);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        new Thread(() -> {
+//            synchronized (o) {
+//                System.out.println(ClassLayout.parseInstance(o).toPrintable());
+//            }
+//        }).start();
+//
+//        // 4.重量级锁
+//        Thread t1 = new Thread(() -> {
+//            synchronized (o) {
+//                System.out.println("thread1 locking");
+//                System.out.println(ClassLayout.parseInstance(o).toPrintable());
+//                // 线程晚点死亡，造成锁竞争
+//                try {
+//                    TimeUnit.SECONDS.sleep(2);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+//        Thread t2 = new Thread(() -> {
+//            synchronized (o) {
+//                System.out.println("thread2 locking");
+//                System.out.println(ClassLayout.parseInstance(o).toPrintable());
+//                // 线程晚点死亡，造成锁竞争
+//                try {
+//                    TimeUnit.SECONDS.sleep(2);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+//        t1.start();
+//        t2.start();
+
+//        Integer[] nums = new Integer[2];
+//        nums[0] = 0;
+//        nums[1] = 1;
+//        numberTest(nums);
+    }
+
+    public static void numberTest (Number[] numbers) {
+
+
+        for (Number num : numbers) {
+            System.out.println(num);
+        }
     }
 
     public static boolean isEmpty(String arg) {

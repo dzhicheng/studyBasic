@@ -378,8 +378,10 @@ public abstract class AbstractQueuedSynchronizer
      * 把node节点设置成head节点，且Node.waitStatus->Node.PROPAGATE
      */
     private void setHeadAndPropagate(Node node, int propagate) {
-        Node h = head; //h用来保存旧的head节点
-        setHead(node);//head引用指向node节点
+        //h用来保存旧的head节点
+        Node h = head;
+        //head引用指向node节点
+        setHead(node);
         /* 这里意思有两种情况是需要执行唤醒操作
          * 1.propagate > 0 表示调用方指明了后继节点需要被唤醒
          * 2.头节点后面的节点需要被唤醒（waitStatus<0），不论是老的头结点还是新的头结点
@@ -387,7 +389,8 @@ public abstract class AbstractQueuedSynchronizer
         if (propagate > 0 || h == null || h.waitStatus < 0 ||
                 (h = head) == null || h.waitStatus < 0) {
             Node s = node.next;
-            if (s == null || s.isShared())//node是最后一个节点或者 node的后继节点是共享节点
+            //node是最后一个节点或者 node的后继节点是共享节点
+            if (s == null || s.isShared())
                 /* 如果head节点状态为SIGNAL，唤醒head节点线程，重置head.waitStatus->0
                  * head节点状态为0(第一次添加时是0)，设置head.waitStatus->Node.PROPAGATE表示状态需要向后继节点传播
                  */
@@ -521,8 +524,11 @@ public abstract class AbstractQueuedSynchronizer
                     return interrupted;
                 }
                 /**
-                 * 如果前驱节点不是Head，通过shouldParkAfterFailedAcquire判断是否应该阻塞
-                 * 前驱节点信号量为-1，当前线程可以安全被parkAndCheckInterrupt用来阻塞线程
+                 * 如果前驱节点不是Head：将信号量的状态由0改为-1(可以唤醒)
+                 *  通过shouldParkAfterFailedAcquire判断是否应该阻塞
+                 *  前驱节点信号量为-1，当前线程可以安全被parkAndCheckInterrupt用来阻塞线程
+                 *
+                 *  parkAndCheckInterrupt，第二轮循环，阻塞当前线程
                  */
                 if (shouldParkAfterFailedAcquire(p, node) &&
                         parkAndCheckInterrupt())
@@ -644,6 +650,7 @@ public abstract class AbstractQueuedSynchronizer
                 if (p == head) {
                     int r = tryAcquireShared(arg);
                     if (r >= 0) {
+                        // 广播通知其他线程
                         setHeadAndPropagate(node, r);
                         p.next = null; // help GC
                         failed = false;
@@ -1328,9 +1335,12 @@ public abstract class AbstractQueuedSynchronizer
      */
     public class ConditionObject implements Condition, java.io.Serializable {
         private static final long serialVersionUID = 1173984872572414699L;
-        /** First node of condition queue. */
+        /**
+         * First node of condition queue. 队头
+         */
         private transient Node firstWaiter;
-        /** Last node of condition queue. */
+        /** Last node of condition queue. 队尾
+         */
         private transient Node lastWaiter;
 
         /**

@@ -1,7 +1,8 @@
 package com.dongzhic.leetcode.simple;
 
+import com.dongzhic.leetcode.common.TreeNode;
+
 import java.util.*;
-import java.util.concurrent.Future;
 
 /**
  * @Author dongzhic
@@ -11,28 +12,207 @@ public class App {
 
     public static void main(String[] args) {
 
-       Map<String, Object> map = new HashMap<>(16);
-       map.put("1", 1);
-       map.put("2", 2);
-       map.put("3", 3);
-
-       for (Map.Entry<String, Object> entry : map.entrySet()) {
-           System.out.println(entry.getKey());
-           System.out.println(entry.getValue());
-       }
-
-       for (String key : map.keySet()) {
-           System.out.println(key);
-           System.out.println(map.get(key));
-       }
-
-       Iterator<Map.Entry<String, Object>> iterator = map.entrySet().iterator();
-       while (iterator.hasNext()) {
-           Map.Entry<String, Object> entry = iterator.next();
-           entry.getKey();
-           entry.getValue();
-       }
+        String s = "string";
+        System.out.println(s.charAt(0));
     }
+
+
+    /**
+     * 102. 二叉树的层序遍历
+     * @param root
+     * @return
+     */
+    public List<List<Integer>> levelOrder(TreeNode root) {
+
+        List<List<Integer>> result = new ArrayList<>();
+        Stack<List<TreeNode>> stack = new Stack<>();
+
+        if (root == null) {
+            return result;
+        }
+
+        // 初始化
+        List<TreeNode> initTreeNode = new ArrayList<>();
+        initTreeNode.add(root);
+        stack.add(initTreeNode);
+
+        while (!stack.isEmpty()) {
+
+            List<TreeNode> currList = stack.pop();
+            List<TreeNode> nextList = new ArrayList<>();
+            List<Integer> currResult = new ArrayList<>();
+
+            for (TreeNode node : currList) {
+                currResult.add(node.val);
+
+                if (node.left != null) {
+                    nextList.add(node.left);
+                }
+                if (node.right != null) {
+                    nextList.add(node.right);
+                }
+            }
+
+            if (nextList.size() > 0) {
+                stack.push(nextList);
+            }
+
+            result.add(currResult);
+        }
+
+
+        return result;
+    }
+
+    /**
+     * 141. 环形链表
+     * @param head
+     * @return
+     */
+    public boolean hasCycle(ListNode head) {
+        if (head == null || head.next == null) {
+            return false;
+        }
+
+        ListNode slowHead = head;
+        ListNode fastHead = head;
+
+        while (fastHead != null && fastHead.next != null) {
+            slowHead = slowHead.next;
+            fastHead = fastHead.next.next;
+
+            if (slowHead == fastHead) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * 160. 相交链表
+     * @param headA
+     * @param headB
+     * @return
+     */
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+
+        if (headA == null || headB == null) {
+            return null;
+        }
+
+        ListNode h1 = headA;
+        ListNode h2 = headB;
+
+        while (h1 != null || h2 != null) {
+            if (h1 == null) {
+                h1 = headB;
+            }
+            if (h2 == null) {
+                h2 = headA;
+            }
+
+            if (h1 == h2) {
+                return h1;
+            }
+            h1 = h1.next;
+            h2 = h2.next;
+        }
+
+        return null;
+    }
+
+    /**
+     * 55. 跳跃游戏：贪心算法
+     *  每次跳最大位置，看最后所在的位置是否大于数组最后的位置
+     * @param nums
+     * @return
+     */
+    public boolean canJump(int[] nums) {
+
+        // 记录跳跃最大位置
+        int maxIndex = 0;
+
+        // 数组长度
+        int len = nums.length;
+
+        for (int i = 0; i < len; i++) {
+
+            // 当前位置大于maxIndex，无法跳到数组最后位置
+            if (i > maxIndex) {
+                return false;
+            }
+
+            // 当前能跳到最大位置
+            int currMaxIndex = i + nums[i];
+
+            if (currMaxIndex > maxIndex) {
+                maxIndex = currMaxIndex;
+            }
+        }
+
+        return maxIndex >= len - 1;
+    }
+
+
+    /**
+     * 3. 无重复字符的最长子串：滑动窗口算法
+     * @param s
+     * @return
+     */
+    public int lengthOfLongestSubstring(String s) {
+
+        if (s == null || "".equals(s)) {
+            return 0;
+        }
+
+        // 最长子串长度
+        int maxLong = 1;
+
+        // 子串起始位置
+        int slow = 0;
+        // 存储字符位置
+        Map<Character, Integer> map = new HashMap<>();
+
+        for (int fast = 0; fast < s.length(); fast ++) {
+
+            char c = s.charAt(fast);
+            if (map.containsKey(c)) {
+                slow = Math.max(slow, map.get(c) + 1);
+            }
+            map.put(c, fast);
+
+            maxLong = Math.max(maxLong, fast - slow + 1);
+        }
+
+        return maxLong;
+    }
+
+    /**
+     * 5. 最长回文子串:暴力解法
+     * @param s
+     * @return
+     */
+    public String longestPalindrome(String s) {
+
+        String maxPalindrome = "";
+
+        int len = s.length();
+
+        int[][] dp = new int[len-1][len-1];
+
+        for (int i = 0; i < len; i ++) {
+            dp[i][i] = 1;
+        }
+
+
+
+        
+        
+        return maxPalindrome;
+    }
+
+
 
     /**
      * 14. 最长公共前缀

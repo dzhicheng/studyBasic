@@ -8,12 +8,65 @@ public class Sort {
 
     public static void main(String[] args) {
 //        int [] array = {4, 11, 2, 78, 10, 1};
-        int [] array = {-9, 18, 0, 23, -567, 70};
-        int [] result = insertTionSort(array);
-        for (int i = 0; i < result.length; i ++) {
-            System.out.println(result[i]);
-        }
+        int [] array = {5, 13, 19, 21, 37, 56, 64, 75, 80, 88, 92};
+
+        binarySearch1(array, 21, 0, array.length-1);
+
     }
+
+
+    /**
+     * 二分查找：递归
+     * @param array
+     * @return
+     */
+    public static int binarySearch1 (int[] array, int key, int low, int high) {
+
+        int result;
+
+        int middle = (low+high)/2;
+
+        if (array[middle] > key) {
+            result = binarySearch1(array, key, low, middle - 1);
+        } else if (array[middle] < key) {
+            result = binarySearch1(array, key, middle + 1, high);
+        } else {
+            result = middle;
+        }
+
+        return result;
+    }
+
+
+    /**
+     * 二分查找：while循环
+     * @param array
+     * @return
+     */
+    public static int binarySearch2 (int[] array, int key) {
+
+        int low = 0;
+        int high = array.length-1;
+
+        while (low <= high) {
+
+            int middle = (low + high)/2;
+
+            if (array[middle] > key) {
+                high = middle - 1;
+            } else if (array[middle] < key) {
+                low = middle + 1;
+            } else {
+                return middle;
+            }
+
+        }
+
+        return -1;
+    }
+
+
+
 
 
     /**

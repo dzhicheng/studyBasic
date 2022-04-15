@@ -1,6 +1,5 @@
 package com.dongzhic.redis;
 
-import org.junit.Test;
 import redis.clients.jedis.*;
 
 import java.io.IOException;
@@ -59,7 +58,6 @@ public class JedisTest {
 
 
 
-    @Test
     public void demo01 () {
         String key = "name";
         // 1.设置IP和端口

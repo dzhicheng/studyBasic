@@ -1,6 +1,7 @@
 package com.dongzhic.java.thread;
 
 import java.sql.PseudoColumnUsage;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -11,6 +12,7 @@ public class ThreadLocalTest {
 
     public static void main(String[] args) {
 
+//        Thread
 //        ThreadLocal
 
         Person p = new Person();

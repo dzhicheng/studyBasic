@@ -1,7 +1,5 @@
 package com.dongzhic.leetcode.simple;
 
-import com.dongzhic.datastructures.List;
-
 /**
  * 链表
  * @Author dongzhic

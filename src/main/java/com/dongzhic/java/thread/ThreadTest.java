@@ -8,6 +8,8 @@ public class ThreadTest {
 
     private static boolean initFlag = false;
 
+
+
     public static void main(String[] args) {
 
         new Thread( () -> {
